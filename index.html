@@ -1,412 +1,110 @@
 <!DOCTYPE html>
-
 <html lang="en-US">
+<!--Map stuff goes here-->
 <head>
-	<title>HandiMap</title>
-	
-	<meta content="initial-scale=1.0, user-scalable=no" name="viewport" />
-	<meta name="description" content="A free service for sharing handicap accessibility in the community" />
-	<meta name="keywords" content="Google Maps, HandiMap, handicap, disabled, accessibility, mapping" />
-	<meta name="author" content="Jeremy Bailey" />
-	<meta name="author" content="Timothy Bates" />
-	<meta name="author" content="Jeffery Briggs" />
-	<meta name="author" content="Tyler Kass" />
+	<title>FF-Bot</title>
+	<meta content="initial-scale=1.0, user-scalable=no" name="viewport">
 	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+	</script>
+	<style>
+	          html, body {
+	              height: 100%;
+	              margin: 0;
+	              padding: 0;
+	           }
 
-	<link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet" />
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6gixDfpqrwyp3Xo-ryZP60zZLxyJqHSc&libraries=places&callback=initMap" async defer></script>	
-	<link rel="stylesheet" href="src/style.css" />
+	       .brand-centered {
+	         display: flex;
+	         justify-content: center;
+	         position: absolute;
+	         width: 100%;
+	         left: 0;
+	         top: 0;
+	       }
+
+	       .navbar { 
+	           margin-bottom: 0; 
+	       }
+
+	       .header .navbar-brand {
+	         height: 80px;
+	         width: auto;
+	         padding: 8px 0px 0px 0px;
+	       }
+
+	       .header .nav >li >a {
+	         padding-top: 30px;
+	         padding-bottom: 30px;
+	       }
+	       .header .navbar-toggle {
+	         padding: 10px;
+	         margin: 25px 15px 0px 0;
+	       }
+
+	       .navbar-inverse .navbar-nav > .active{
+	           color: #000;
+	          background: #d65c14;
+	        }
+
+	        body { 
+	        	padding-top: 81px;
+	        }
+
+
+	        .bg {
+	          background: url('https://i.imgur.com/9ytrh45.png') no-repeat center center;
+	          position: fixed;
+	          width: 100%;
+	          height: 350px; 
+	          top:0;
+	          left:0;
+	          z-index: -1;
+	          -webkit-filter: blur(2px);
+              -webkit-filter: blur(2px);
+              -o-filter: blur(2px);
+              -ms-filter: blur(2px);
+              filter: blur(2px);
+	        }
+
+	        .jumbotron {
+	          height: 350px;
+	          color: white;
+	          text-shadow: #444 0 1px 1px;
+	          background:transparent;
+	        }
+
+	</style>
 </head>
-
 <body>
 	<div class="header">
-		<nav class="navbar navbar-inverse navbar-static-top">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button class="navbar-toggle collapsed" data-target="#navbar3" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand image-responsive" href=""><img alt="HandiMap" width="200px" height="80px" src="src/handimap.png"></a>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar3">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active">
-							<a href="#">Home</a>
-						</li>
 						<li>
-							<a href="about.html">About</a>
+							<a href="index.html">Home</a>
 						</li>
-						<li class="dropdown">
-							<a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Dropdown <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li>
-									<a href="#" onclick="toggleLocations();">Toggle Location Markers</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#" onclick="togglePaths();">Toggle Paths</a>
-								</li>
-								<li class="divider"></li>
-								<li>
-									<a href="#" onclick="toggleComments();">Toggle User Comments</a>
-								</li>
-							</ul>
+						<li class="active">
+							<a href="#">About</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</div>
-	
-	<form>
-		<input class="controls" id="searchInput" placeholder="Enter a location" type="text"> <!-- Removed col-md-12 from map div -->
-	</form>
-	
 
-		<div class="" id="map"></div>
-
-	
-	<!--Form Data-->
-	<div id="form">
-		<table>
-			<tr><td><b>Add A New Comment</b></td></tr>
-			<tr><td>Name:</td> <td><input type='text' id='#comment_name'/> </td> </tr>
-			<tr><td>Description:</td> <td><input type='text' id='#comment_description'/> </td> </tr>
-			<tr><td></td><td><input type='button' value='Save' onclick='placeComment();'/></td></tr>
-		</table>
+	<div class="bg"></div>
+	<div class="jumbotron">
+	  <h1>About</h1>
+	  <p class="lead"></p>
 	</div>
-	
-	<script>
-		/* MAP FUNCTIONS */
-		var count = 1;
-		var map;
-		var infowindow;
-		var messagewindow;
-		var pos;
-		
-		/* map element arrays */
-		var locationList = [];
-		var pathList = [];
-		var commentList = [];
-		
-		/* boolean toggles */
-		var locationsVisible = true;
-		var pathsVisible = false;
-		var commentsVisible = true;
-					
-		function initMap() {
-			/* map is centered at John C. Pace Library, UWF */
-			map = new google.maps.Map(document.getElementById('map'), {
-				center: {lat: 30.549934, lng: -87.217281},
-				zoom: 18,
-				rotateControl: false,
-				streetViewControl: false,
-				mapTypeId: 'satellite'
-			});
-		
-			infowindow = new google.maps.InfoWindow({
-				content: document.getElementById('form')
-			});
-			
-			messagewindow = new google.maps.InfoWindow({
-				content: document.getElementById('message')
-			});
-
-			//Image definitions for markers
-			var good = {
-				url: 'src/green.png',
-				size: new google.maps.Size(32,32),
-				origin: new google.maps.Point(0,0),
-			}
-			
-			var bad = {
-				url: 'src/red.png',
-				size: new google.maps.Size(32,32),
-				origin: new google.maps.Point(0,0)
-			}
-			
-			//For user comments
-			var usercommentimg = {
-				url: 'src/comment.png',
-				size: new google.maps.Size(22,48),
-				origin: new google.maps.Point(0,0)
-			}
-			
-			/* load map and existing location markers, paths, and comments */
-			/* usage: name, lat, lng, upvote, downvote, wheelchair, elevator, automatic doors */
-
-			/* Load Location Markers */
-			//Load locations.txt file into array
-			$.get("locations.txt", function(data) {
-				var contents = data.split("\n");
-				var locations = [];
-				
-				for(i = 0; i < contents.length; i++)
-				{
-					var line = contents[i].split(",");
-					locations.push(line);
-				}
-				//Load all stored markers
-				for(var i = 0; i < locations.length; i++)
-				{
-					var location = locations[i];
-					
-					var image;
-					
-					if((Number(location[3])/Number(location[4]))*100 >= 70){
-						image = good;
-					}
-					else image = bad;
-					
-					var marker = new google.maps.Marker({
-						position: {lat: Number(location[1]), lng: Number(location[2])},
-						map: map,
-						icon: image,
-						//title: location[0],
-						upvotes: location[3],
-						downvotes: location[4],
-						wheelchair: location[5],
-						elevator: location[6],
-						doors: location[7],
-						content: "<b>" + location[0] + "<br/>Rating: " + ((Number(location[3])/(Number(location[4])+Number(location[3]))*100)) + "%" + "<br/>Wheelchair Ramps: " + Number(location[5]) + "<br/>Elevators: " + Number(location[6]) + "<br/>Automatic Doors: " + Number(location[7]),
-						summary: "<b>" + location[0] + "<br/>Rating: " + ((Number(location[3])/(Number(location[4])+Number(location[3]))*100)) + "%"
-					});
-					
-					var info = new google.maps.InfoWindow();
-					
-					/* event listeners for markers */
-					google.maps.event.addListener(marker, 'click', function(){
-						info.setContent(this.content + "<br/><a href=\"JavaScript:voteUp(this)\"><img src=\"src/up.png\"></a>&nbsp;&nbsp;&nbsp;<a href=\"JavaScript:voteDown(this)\"><img src=\"src/down.png\"></a>");
-						info.open(map, this);
-					});
-					
-					
-					google.maps.event.addListener(marker, 'mouseover', function(){
-						info.setContent(this.summary);
-						info.open(map, this);
-					});
-					
-					
-					google.maps.event.addListener(marker, 'mouseout', function(){
-						info.close(map, this);
-					});
-					
-					locationList.push(marker);
-				}
-			});
-				
-			/* Load User comments */
-			//Load comments.txt file into array
-			$.get("./comments.txt", function(data) {
-				var contents = data.split("\n");
-				var comments = [];
-				
-				for(i = 0; i < contents.length; i++)
-				{
-					var line = contents[i].split(",");
-					comments.push(line);
-				}
-				//Load all stored markers
-				for(var i = 0; i < comments.length; i++)
-				{
-					var comment = comments[i];
-
-					var commentmarker = new google.maps.Marker({
-						position: {lat: Number(comment[1]), lng: Number(comment[2])},
-						map: map,
-						icon: usercommentimg,
-						//title: "Comment by " + location[0],
-						upvotes: comment[3],
-						downvotes: comment[4],
-						content: "<b>By " + comment[0] + " - Comment Rating: " + ((Number(comment[3])/(Number(comment[4])+Number(comment[3]))*100)) + "%</b><br/><p>" + comment[5] + "</p>",
-						summary: "<b>By " + comment[0] + " - Comment Rating: " + ((Number(comment[3])/(Number(comment[4])+Number(comment[3]))*100)) + "%"
-					});
-					
-					var info = new google.maps.InfoWindow();
-					
-					/* event listeners for comments */
-					google.maps.event.addListener(commentmarker, 'click', function(){
-						info.setContent(this.content + "<br/><a href=\"JavaScript:voteUp(this)\"><img src=\"src/up.png\"></a>&nbsp;&nbsp;&nbsp;<a href=\"JavaScript:voteDown(this)\"><img src=\"src/down.png\"></a>");
-						info.open(map, this);
-					});
-					
-					
-					google.maps.event.addListener(commentmarker, 'mouseover', function(){
-						info.setContent(this.summary);
-						info.open(map, this);
-					});
-					
-					
-					google.maps.event.addListener(commentmarker, 'mouseout', function(){
-						info.close(map, this);
-					});
-					
-					commentList.push(commentmarker);
-				}
-			});
-				
-			google.maps.event.addListener(map, 'rightclick', function(event){
-				if(count > 0){
-					infowindow.open(map);
-					infowindow.setPosition({lat: event.latLng.lat(), lng: event.latLng.lng()});
-					pos = {lat: event.latLng.lat(), lng: event.latLng.lng()};
-				}
-				else alert('You may only place one comment per minute.');
-			});
-		
-			/* PATH SPECIFIC */
-			//add path to map
-			function addPath(map){
-			}
-			
-			/////////////////////////////////////////////
-			/////////////////////////////////////////////
-			/////////////////////////////////////////////
-			/////////////////////////////////////////////
-			
-				  // Try HTML5 geolocation. Set the location to the users GPS coordinates  
-			var input = document.getElementById('searchInput');
-			map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-			var autocomplete = new google.maps.places.Autocomplete(input);
-			autocomplete.bindTo('bounds', map);
-
-			var infowindow2 = new google.maps.InfoWindow();
-			var marker = new google.maps.Marker({
-				map: map,
-				anchorPoint: new google.maps.Point(0, -29)
-			});
-
-			autocomplete.addListener('place_changed', function() {
-				infowindow2.close();
-				marker.setVisible(false);
-				var place = autocomplete.getPlace();
-				if (!place.geometry) {
-					window.alert("Autocomplete's returned place contains no geometry");
-					return;
-				}
-			
-				// If the place has a geometry, then present it on a map.
-				if (place.geometry.viewport) {
-					map.fitBounds(place.geometry.viewport);
-				}
-				else {
-					map.setCenter(place.geometry.location);
-					map.setZoom(17);
-				}
-				
-				marker.setIcon(({
-					url: place.icon,
-					size: new google.maps.Size(71, 71),
-					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(17, 34),
-					scaledSize: new google.maps.Size(35, 35)
-				}));
-				
-				marker.setPosition(place.geometry.location);
-				marker.setVisible(true);
-			  
-				var address = '';
-				if (place.address_components) {
-					address = [
-					(place.address_components[0] && place.address_components[0].short_name || ''),
-					(place.address_components[1] && place.address_components[1].short_name || ''),
-					(place.address_components[2] && place.address_components[2].short_name || '')
-					].join(' ');
-				}
-			  
-				infowindow2.setContent('<div><strong>' + place.name + '<\/strong><br>' + address);
-				infowindow2.open(map, marker);
-			});
-		}
-
-		function placeComment(){
-			if(document.getElementById('#comment_name').value != "" && document.getElementById('#comment_description').value != ""){
-				var newcomment = new google.maps.Marker({
-					position: pos,
-					map: map,
-					icon: 'src/comment.png',
-					name: document.getElementById('#comment_name').value,
-					content: "By " + document.getElementById('#comment_name').value + "<br/>" + document.getElementById('#comment_description').value,
-					summary: "By " + document.getElementById('#comment_name').value
-				});
-				
-				infowindow.close();
-				
-				var info = new google.maps.InfoWindow();
-				
-				/* event listeners for comments */
-				google.maps.event.addListener(newcomment, 'click', function(){
-					info.setContent(this.content + "<br/><a href=\"JavaScript:voteUp(this)\"><img src=\"src/up.png\"></a>&nbsp;&nbsp;&nbsp;<a href=\"JavaScript:voteDown(this)\"><img src=\"src/down.png\"></a>");
-					info.open(map, this);
-				});
-				
-				google.maps.event.addListener(newcomment, 'mouseover', function(){
-					info.setContent(this.summary);
-					info.open(map, this);
-				});
-				
-				google.maps.event.addListener(newcomment, 'mouseout', function(){
-					info.close(map, this);
-				});
-				
-				commentList.push(newcomment);
-			}
-		}
-
-		/* USER COMMENT SPECIFIC */
-		function setLocations(map){
-			for(var i = 0; i < locationList.length; i++){
-				locationList[i].setMap(map);
-			}
-		}
-		
-		function setComments(map){
-			for(var i = 0; i < commentList.length; i++){
-				commentList[i].setMap(map);
-			}
-		}
-		
-		function setPaths(map){
-			for(var i = 0; i < pathList.length; i++){
-				pathList[i].setMap(map);
-			}
-		}
-		
-		function toggleLocations(){
-			if(locationsVisible == true){
-				setLocations(null);
-				locationsVisible = false;
-			}
-			else if(locationsVisible == false){
-				setLocations(map);
-				locationsVisible = true;
-			}
-		}
-		
-		//toggle paths
-		function togglePaths(){
-			if(pathsVisible == true){
-				setPaths(null);
-				pathsVisible = false;
-			}
-			else if(pathsVisible == false){
-				setPaths(map);
-				pathsVisible = true;
-			}
-		}
-		//toggle comments
-		function toggleComments(){
-			if(commentsVisible == true){
-				setComments(null);
-				commentsVisible = false;
-			}
-			else if(commentsVisible == false){
-				setComments(map);
-				commentsVisible = true;
-			}
-		}
-	</script> 
 </body>
 </html>
