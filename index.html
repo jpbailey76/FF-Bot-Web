@@ -1,99 +1,57 @@
 <!DOCTYPE html>
+
 <html lang="en-US">
-<!--Map stuff goes here-->
 <head>
-	<title>FF-Bot</title>
-	<meta content="initial-scale=1.0, user-scalable=no" name="viewport">
+	<title>HandiMap</title>
+	
+	<meta content="initial-scale=1.0, user-scalable=no" name="viewport" />
+	<meta name="description" content="A free service for sharing handicap accessibility in the community" />
+	<meta name="keywords" content="Google Maps, HandiMap, handicap, disabled, accessibility, mapping" />
+	<meta name="author" content="Jeremy Bailey" />
+	<meta name="author" content="Timothy Bates" />
+	<meta name="author" content="Jeffery Briggs" />
+	<meta name="author" content="Tyler Kass" />
 	<meta charset="utf-8">
-	<link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-	</script>
-	<style>
-	          html, body {
-	              height: 100%;
-	              margin: 0;
-	              padding: 0;
-	           }
 
-	       .brand-centered {
-	         display: flex;
-	         justify-content: center;
-	         position: absolute;
-	         width: 100%;
-	         left: 0;
-	         top: 0;
-	       }
-
-	       .navbar { 
-	           margin-bottom: 0; 
-	       }
-
-	       .header .navbar-brand {
-	         height: 80px;
-	         width: auto;
-	         padding: 8px 0px 0px 0px;
-	       }
-
-	       .header .nav >li >a {
-	         padding-top: 30px;
-	         padding-bottom: 30px;
-	       }
-	       .header .navbar-toggle {
-	         padding: 10px;
-	         margin: 25px 15px 0px 0;
-	       }
-
-	       .navbar-inverse .navbar-nav > .active{
-	           color: #000;
-	          background: #d65c14;
-	        }
-
-	        body { 
-	        	padding-top: 81px;
-	        }
-
-
-	        .bg {
-	          background: url('https://i.imgur.com/9ytrh45.png') no-repeat center center;
-	          position: fixed;
-	          width: 100%;
-	          height: 350px; 
-	          top:0;
-	          left:0;
-	          z-index: -1;
-	          -webkit-filter: blur(2px);
-              -webkit-filter: blur(2px);
-              -o-filter: blur(2px);
-              -ms-filter: blur(2px);
-              filter: blur(2px);
-	        }
-
-	        .jumbotron {
-	          height: 350px;
-	          color: white;
-	          text-shadow: #444 0 1px 1px;
-	          background:transparent;
-	        }
-
-	</style>
+	<link href="https://fonts.googleapis.com/css?family=Pathway+Gothic+One" rel="stylesheet" />
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6gixDfpqrwyp3Xo-ryZP60zZLxyJqHSc&libraries=places&callback=initMap" async defer></script>	
+	<link rel="stylesheet" href="src/style.css" />
 </head>
+
 <body>
 	<div class="header">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 				<div class="navbar-header">
 					<button class="navbar-toggle collapsed" data-target="#navbar3" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand image-responsive" href=""><img alt="HandiMap" width="200px" height="80px" src="src/handimap.png"></a>
 				</div>
 				<div class="navbar-collapse collapse" id="navbar3">
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a href="index.html">Home</a>
-						</li>
 						<li class="active">
-							<a href="#">About</a>
+							<a href="#">Home</a>
+						</li>
+						<li>
+							<a href="about.html">About</a>
+						</li>
+						<li class="dropdown">
+							<a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Dropdown <span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#" onclick="toggleLocations();">Toggle Location Markers</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#" onclick="togglePaths();">Toggle Paths</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="#" onclick="toggleComments();">Toggle User Comments</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</div>
@@ -101,10 +59,5 @@
 		</nav>
 	</div>
 
-	<div class="bg"></div>
-	<div class="jumbotron">
-	  <h1>About</h1>
-	  <p class="lead"></p>
-	</div>
 </body>
 </html>
